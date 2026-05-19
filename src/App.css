@@ -26,18 +26,25 @@
 }
 
 .password-box {
-  display: felx;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   background: #f1f1f1;
-  padding: 14px;
+  padding: 12px 14px;
   border-radius: 10px;
   margin-bottom: 20px;
 }
 
 .password-box span {
+  flex: 1;
   word-break: break-all;
+  overflow-wrap: anywhere;
+  line-height: 1.4;
+}
+
+.password-box button {
+  flex-shrink: 0;
 }
 
 button {
@@ -45,6 +52,15 @@ button {
   border: none;
   border-radius: 8px;
   padding: 10px 14px;
+}
+
+button:disabled {
+  opacity: 5;
+  cursor: not-allowed;
+}
+
+.placeholder {
+  color: #888;
 }
 
 .options {

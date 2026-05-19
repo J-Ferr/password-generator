@@ -28,6 +28,11 @@ function App() {
       characters += "!@#$%^&*()_+";
     }
 
+    if (characters === "") {
+      alert("Please select at least one option.");
+      return;
+    }
+
     let generatedPassword ="";
 
     for (let i = 0; i < length; i++) {
@@ -46,8 +51,15 @@ function App() {
         <p>Create a strong random password.</p>
 
         <div className="password-box">
-          <span>{password || "Your password will appear here"}</span>
-          <button>copy</button>
+          <span className={!password ? "placeholder" : ""}>
+            {password || "Your password will appear here"}
+            </span>
+          <button 
+          disabled={!password}
+          onClick={() => navigator.clipboard.writeText(password)}
+            >
+            copy
+            </button>
         </div>
 
         <label>

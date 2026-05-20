@@ -5,9 +5,10 @@ function App() {
   const [password, setPassword] = useState<string>("");
   const [length, setLength] = useState<number>(12);
   const [includeUppercase, setIncludeUppercase] = useState<boolean>(true);
-  const [inlcudeLowercase, setIncludeLowercase] = useState<boolean>(true);
+  const [includeLowercase, setIncludeLowercase] = useState<boolean>(true);
   const [includeNumbers, setIncludeNumbers] = useState<boolean>(true);
   const [includeSymbols, setIncludeSymbols] = useState<boolean>(false);
+  const [copied, setCopied] = useState<boolean>(false);
 
   const generatePassword = () => {
     let characters = "";
@@ -16,7 +17,7 @@ function App() {
       characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     }
 
-    if (inlcudeLowercase) {
+    if (includeLowercase) {
       characters += "abcdefghijklmnopqrstuvwxyz";
     }
 
@@ -44,6 +45,32 @@ function App() {
     setPassword(generatedPassword);
   }
 
+  const getPasswordStrength = () => {
+    if (!password) {
+      return "";
+    }
+
+    if (password.length < 8) {
+      return "Weak";
+    }
+
+    if (password.length < 12) {
+      return "Medium";
+    }
+
+    return "Strong";
+  };
+
+  const copyPassword = async () => {
+    await navigator.clipboard.writeText(password);
+
+    setCopied(true);
+
+    setTimeout(() => {
+      setCopied(false);
+    }, 2000);
+  };
+
   return (
     <main className="app">
       <section className="card">
@@ -56,11 +83,19 @@ function App() {
             </span>
           <button 
           disabled={!password}
-          onClick={() => navigator.clipboard.writeText(password)}
+          onClick={copyPassword}
             >
             copy
             </button>
         </div>
+
+        {password && (
+          <p className={`strength ${getPasswordStrength().toLowerCase()}`}>
+            Strength: {getPasswordStrength()}
+          </p>
+        )}
+
+        {copied && <div className="toast">Copied!</div>}
 
         <label>
           password Length
@@ -86,8 +121,8 @@ function App() {
           <label>
             <input 
             type="checkbox" 
-            checked={inlcudeLowercase}
-            onChange={() => setIncludeLowercase(!inlcudeLowercase)} 
+            checked={includeLowercase}
+            onChange={() => setIncludeLowercase(!includeLowercase)} 
             />
             Inlcude Lowercase
           </label>

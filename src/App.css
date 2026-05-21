@@ -111,9 +111,26 @@ button:disabled {
   margin: 18px 0;
 }
 
-.generator-btn {
+.generate-btn {
   width: 100%;
   background: #111827;
   color: white;
   font-weight: bold;
+}
+
+.length-control {
+  display: grid;
+  gap: 10px;
+}
+
+.length-control label {
+  font-weight: bold;
+}
+
+.length-control span {
+  color: #2563eb;
+}
+
+.length-control input {
+  width: 100%;
 }

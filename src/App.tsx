@@ -143,16 +143,20 @@ useEffect(() => {
 
         {copied && <div className="toast">Copied!</div>}
 
-        <label>
-          password Length
-          <input 
-          type="number" 
-          min="4" 
-          max="32" 
-          value={length}
-          onChange={(e) => setLength(Number(e.target.value))} 
+        <div className="length-control">
+          <label htmlFor="length">
+            Password Length: <span>{length}</span>
+          </label>
+
+          <input
+            id="length"
+            type="range"
+            min="4"
+            max="32"
+            value={length}
+            onChange={(e) => setLength(Number(e.target.value))}
           />
-        </label>
+        </div>
 
         <div className="options">
           <label>

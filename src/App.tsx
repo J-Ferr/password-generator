@@ -1,14 +1,44 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
   const [password, setPassword] = useState<string>("");
-  const [length, setLength] = useState<number>(12);
-  const [includeUppercase, setIncludeUppercase] = useState<boolean>(true);
-  const [includeLowercase, setIncludeLowercase] = useState<boolean>(true);
-  const [includeNumbers, setIncludeNumbers] = useState<boolean>(true);
-  const [includeSymbols, setIncludeSymbols] = useState<boolean>(false);
+  const [length, setLength] = useState<number>(() => {
+  const savedLength = localStorage.getItem("length");
+  return savedLength ? Number(savedLength) : 12;
+});
+
+const [includeUppercase, setIncludeUppercase] = useState<boolean>(() => {
+  return localStorage.getItem("includeUppercase") === "false"
+    ? false
+    : true;
+});
+
+const [includeLowercase, setIncludeLowercase] = useState<boolean>(() => {
+  return localStorage.getItem("includeLowercase") === "false"
+    ? false
+    : true;
+});
+
+const [includeNumbers, setIncludeNumbers] = useState<boolean>(() => {
+  return localStorage.getItem("includeNumbers") === "false"
+    ? false
+    : true;
+});
+
+const [includeSymbols, setIncludeSymbols] = useState<boolean>(() => {
+  return localStorage.getItem("includeSymbols") === "true";
+});
   const [copied, setCopied] = useState<boolean>(false);
+
+useEffect(() => {
+  localStorage.setItem("length", String(length));
+  localStorage.setItem("includeUppercase", String(includeUppercase));
+  localStorage.setItem("includeLowercase", String(includeLowercase));
+  localStorage.setItem("includeNumbers", String(includeNumbers));
+  localStorage.setItem("includeSymbols", String(includeSymbols));
+}, [length, includeUppercase, includeLowercase, includeNumbers, includeSymbols]);
+
 
   const generatePassword = () => {
   const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

@@ -11,39 +11,55 @@ function App() {
   const [copied, setCopied] = useState<boolean>(false);
 
   const generatePassword = () => {
-    let characters = "";
+  const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+  const numberChars = "0123456789";
+  const symbolChars = "!@#$%^&*()_+";
 
-    if (includeUppercase) {
-      characters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    }
+  let characters = "";
+  let generatedPassword = "";
 
-    if (includeLowercase) {
-      characters += "abcdefghijklmnopqrstuvwxyz";
-    }
+  const getRandomChar = (chars: string): string => {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    return chars[randomIndex];
+  };
 
-    if (includeNumbers) {
-      characters += "0123456789";
-    }
-
-    if (includeSymbols) {
-      characters += "!@#$%^&*()_+";
-    }
-
-    if (characters === "") {
-      alert("Please select at least one option.");
-      return;
-    }
-
-    let generatedPassword ="";
-
-    for (let i = 0; i < length; i++) {
-      const randomIndex = Math.floor(Math.random() * characters.length);
-
-      generatedPassword += characters[randomIndex];
-    }
-
-    setPassword(generatedPassword);
+  if (includeUppercase) {
+    characters += uppercaseChars;
+    generatedPassword += getRandomChar(uppercaseChars);
   }
+
+  if (includeLowercase) {
+    characters += lowercaseChars;
+    generatedPassword += getRandomChar(lowercaseChars);
+  }
+
+  if (includeNumbers) {
+    characters += numberChars;
+    generatedPassword += getRandomChar(numberChars);
+  }
+
+  if (includeSymbols) {
+    characters += symbolChars;
+    generatedPassword += getRandomChar(symbolChars);
+  }
+
+  if (characters === "") {
+    alert("Please select at least one option.");
+    return;
+  }
+
+  for (let i = generatedPassword.length; i < length; i++) {
+    generatedPassword += getRandomChar(characters);
+  }
+
+  const shuffledPassword = generatedPassword
+    .split("")
+    .sort(() => Math.random() - 0.5)
+    .join("");
+
+  setPassword(shuffledPassword);
+};
 
   const getPasswordStrength = () => {
     if (!password) {

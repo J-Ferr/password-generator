@@ -29,7 +29,10 @@ const [includeNumbers, setIncludeNumbers] = useState<boolean>(() => {
 const [includeSymbols, setIncludeSymbols] = useState<boolean>(() => {
   return localStorage.getItem("includeSymbols") === "true";
 });
-  const [copied, setCopied] = useState<boolean>(false);
+const [copied, setCopied] = useState<boolean>(false);
+const [isDarkMode, setIsDarkMode] = useState<boolean>(() => {
+  return localStorage.getItem("isDarkMode") === "true";
+});
 
 useEffect(() => {
   localStorage.setItem("length", String(length));
@@ -38,7 +41,10 @@ useEffect(() => {
   localStorage.setItem("includeNumbers", String(includeNumbers));
   localStorage.setItem("includeSymbols", String(includeSymbols));
 }, [length, includeUppercase, includeLowercase, includeNumbers, includeSymbols]);
-
+ 
+useEffect(() => {
+  localStorage.setItem("isDarkMode", String(isDarkMode));
+}, [isDarkMode]);
 
   const generatePassword = () => {
   const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -118,10 +124,21 @@ useEffect(() => {
   };
 
   return (
-    <main className="app">
+    <main className={`app ${isDarkMode ? "dark" : ""}`}>
       <section className="card">
-        <h1>Password Generator</h1>
-        <p>Create a strong random password.</p>
+        <div className="header">
+          <div>
+            <h1>Password Generator</h1>
+            <p>Create a strong random password.</p>
+        </div>
+
+        <button
+          className="theme-toggle"
+          onClick={() => setIsDarkMode(!isDarkMode)}
+        >
+            {isDarkMode ? "☀️" : "🌙"}
+          </button>
+        </div>
 
         <div className="password-box">
           <span className={!password ? "placeholder" : ""}>

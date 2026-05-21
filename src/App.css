@@ -1,3 +1,6 @@
+/* ========================================
+   App Layout
+======================================== */
 .app {
   min-height: 100vh;
   display: flex;
@@ -25,6 +28,9 @@
   color: #555;
 }
 
+/* ========================================
+   Password Box
+======================================== */
 .password-box {
   display: flex;
   justify-content: space-between;
@@ -47,6 +53,9 @@
   flex-shrink: 0;
 }
 
+/* ========================================
+   Buttons
+======================================== */
 button {
   cursor: pointer;
   border: none;
@@ -63,6 +72,17 @@ button:disabled {
   color: #888;
 }
 
+.generate-btn {
+  width: 100%;
+  background: #111827;
+  color: white;
+  font-weight: bold;
+}
+
+
+/* ========================================
+   Password Strength
+======================================== */
 .strength {
   margin-bottom: 18px;
   font-weight:bold ;
@@ -80,6 +100,9 @@ button:disabled {
   color: #16a34a;
 }
 
+/* ========================================
+   Toast Notification
+======================================== */
 .toast {
   position: fixed;
   bottom: 24px;
@@ -105,19 +128,20 @@ button:disabled {
   }
 }
 
+/* ========================================
+   Checkbox Options
+======================================== */
 .options {
   display: grid;
   gap: 10px;
   margin: 18px 0;
 }
 
-.generate-btn {
-  width: 100%;
-  background: #111827;
-  color: white;
-  font-weight: bold;
-}
 
+
+/* ========================================
+   Slider Controls
+======================================== */
 .length-control {
   display: grid;
   gap: 10px;
@@ -133,4 +157,71 @@ button:disabled {
 
 .length-control input {
   width: 100%;
+}
+
+
+/* ========================================
+   Dark Mode
+======================================== */
+.app {
+  transition: background 0.25s ease;
+}
+
+.card {
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+
+.theme-toggle {
+  background: #e5e7eb;
+}
+
+.app.dark {
+  background: #111827;
+}
+
+.app.dark .card {
+  background: #1f2937;
+  color: white;
+}
+
+.app.dark .card > p {
+  color: #d1d5db;
+}
+
+.app.dark .password-box {
+  background: #374151;
+}
+
+.app.dark .placeholder {
+  color: #9ca3af;
+}
+
+.app.dark .theme-toggle {
+  background: #374151;
+  color: white;
+}
+
+.app.dark .generate-btn {
+  background: white;
+  color: #111827;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.header p {
+  margin-top: 8px;
+}
+
+.theme-toggle {
+  background: #e5e7eb;
+  font-size: 18px;
+  padding: 10px 14px;
+  min-width: 50px;
 }

@@ -47,7 +47,7 @@ Main concepts practiced:
 
 Clone the repository:
 
-```bash
+
 git clone YOUR_REPO_URL_HERE
 
 Go into the project folder:
@@ -60,18 +60,21 @@ npm install
 
 Start the development server:
 
+```bash
 npm run dev
-Future Improvements
-Add password entropy scoring
-Add show/hide password option
-Add auto-copy option after generating
-Add more animations
-Improve mobile styling
-Deploy live version
-Screenshots
+```
+## Future Improvements
+- Add password entropy scoring
+- Add show/hide password option
+- Add auto-copy option after generating
+- Add more animations
+- Improve mobile styling
+- Deploy live version
+
+## Screenshots
 
 Screenshots coming soon.
 
-Author
+## Author
 
 Built by Jose Armando Arellano Ferrara.
